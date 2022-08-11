@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+  - 13
+
+services:
+  - docker
+
+# Prétester les installations
+install:
+  - echo "nothing needs to be installed"
+
+# Scripts à exécuter en guise de tests
+before_script:
+  - echo "no tests"
+
+script:
+  - docker --version # print the version for logging
+  - docker build -t image-filter-app .
+  - docker tag image-filter-app kulturman/image-filter-app:latest
+
+# Tâches à effectuer après la réussite du processus. Le formatage du nom d'utilisateur et du mot de passe Docker comme indiqué ci-dessous vous permet de vous connecter par programmation sans que le mot de passe soit exposé dans les journaux.
+after_success:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push kulturman/image-filter-app
