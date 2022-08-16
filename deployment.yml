@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+name: image-filter
+labels:
+app: image-filter
+spec:
+replicas: 2
+selector:
+matchLabels:
+app: image-filter
+template:
+metadata:
+labels:
+app: image-filter
+spec:
+containers:
+- name: image-filter
+image: kulturman/image-filter-app
+ports:
+- containerPort: 80
