@@ -7,7 +7,7 @@ services:
 
 # Prétester les installations
 install:
-  - echo "nothing needs to be installed"
+  - npm install
 
 # Scripts à exécuter en guise de tests
 before_script:
